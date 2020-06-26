@@ -1,0 +1,160 @@
+<html>
+<head>
+<script>
+const wds =[];	// 21.20.10.44.63
+//const wdShow = [[],[],[],[]];
+function init(){
+	// init
+	txtOut.value = '';
+
+	//plus
+	qw();
+	qe();
+	let item = d(wds);
+	while(item != null){
+//		txtOut.value += item[0] + (0 ==item[2] ?'+': '-') + item[1] + '\n';
+		if (wds.length > 14) {
+			//wdShow[0].push(item);
+			td1.innerText += item[0] + '+' + item[1] + '\n';
+		}else{
+			//wdShow[1].push(item);
+			td2.innerText += item[0] + '+' + item[1] + '\n';
+		}
+		item = d(wds);
+	}
+
+	//minus
+	qr();
+	qt();
+	item = d(wds);
+	if(item != null){
+			td2.innerText += item[0] + '-' + item[1] + '\n';
+	}
+	item = d(wds);
+	while(item != null){
+//		txtOut.value += item[0] + '-' + item[1] + '\n';
+		if (wds.length > 14) {
+//			wdShow[2].push(item);
+			td3.innerText += item[0] + '-' + item[1] + '\n';
+		}else{
+//			wdShow[3].push(item);
+			td4.innerText += item[0] + '-' + item[1] + '\n';
+		}
+		item = d(wds);
+	}
+	td4.innerText += '\n';
+}
+
+// bit: one + one > two
+function qw(){
+	for(let i = 1; i < 6; i++) {
+		for(let j = 10-i; j <10 ; j++) {
+			wds.push(c([i,j, 0]));
+		}
+	}
+	for(let i = 6; i < 10; i++) {
+		for(let j = i+1; j < 10; j++) {
+			wds.push(c([i,j, 0]));
+		}
+	}
+}
+
+// bit: one + one > one
+function qe(){
+	const vv = [];
+	for(let i = 1; i < 5; i++) {
+		for(let j = 9-i; j >i ; j--) {
+			vv.push([i,j]);
+		}
+		vv.push([i,i]);
+	}
+
+	while (vv.length > 0){
+		let ki = c(d(vv));
+		let kk = c(d(vv));
+		wds.push( [
+					ki[0] * 10 + kk[0]
+					, ki[1] * 10 + kk[1]
+					, 0
+				]);
+	}
+}
+
+// bit: 10 - one > one
+function qr(){
+	for(let i = 1; i < 11; i++) {
+		wds.push([10,i, 1]);
+	}
+}
+
+// bit: one - one > one
+function qt(){
+	const vv = [];
+	for(let i = 2; i < 10; i++) {
+		for(let j = 1; j <i ; j++) {
+			vv.push([i,j]);
+		}
+		vv.push([i,i]);
+	}
+	while (vv.length > 0){
+		let ki = d(vv);
+		let kk = d(vv);
+		wds.push( [
+					ki[0] * 10 + kk[0]
+					, ki[1] * 10 + kk[1]
+					, 1
+				]);
+	}
+}
+
+function a(pMax){
+	return Math.floor(Math.random() * pMax);
+}
+
+function b(){
+	return (0 == a(2));
+}
+
+function c(item){
+	if(b()) {
+		let tmp = item[0];
+		item[0] = item[1];
+		item[1] = tmp;
+	}
+	return item;
+}
+
+function d(lst){
+	let dIdx = lst.length;
+	if (dIdx < 1){
+		return null;
+	}
+	dIdx = a(dIdx);
+	let itm = null;
+	if(dIdx == lst.length - 1) {
+		itm = lst.pop();
+	} else {
+		itm = lst[dIdx];
+		lst[dIdx] = lst.pop();
+	}
+	return itm;
+}
+
+function output(){
+	for(let i = 0; i < 15; i++){
+		tb1.appendChild()
+	}
+}
+function ttr(){
+	let tttr = document.createElement("TR");
+	return tttr;
+}
+</script>
+</head>
+<body onload="init();">
+<textarea id="txtIn" style="display:none;"></textarea>
+<textarea id="txtOut" style="width: 100px; height: 400px; display:none;"></textarea>
+<table width="100%"><tbody id="tb1"><tr><td id="td1"></td><td id="td2"></td><td id="td3"></td><td id="td4"></td></tr>
+</tbody></table>
+</body>
+</html>
