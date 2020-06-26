@@ -1,8 +1,7 @@
 <html>
 <head>
 <script>
-const wds =[];	// 21.20.10.44.63
-//const wdShow = [[],[],[],[]];
+const wds =[];
 function init(){
 	// init
 	txtOut.value = '';
@@ -11,14 +10,14 @@ function init(){
 	qw();
 	qe();
 	let item = d(wds);
+	
 	while(item != null){
-//		txtOut.value += item[0] + (0 ==item[2] ?'+': '-') + item[1] + '\n';
-		if (wds.length > 14) {
-			//wdShow[0].push(item);
-			td1.innerText += item[0] + '+' + item[1] + '\n';
-		}else{
-			//wdShow[1].push(item);
+		if (wds.length > 33) {
+			td3.innerText += item[0] + '+' + item[1] + '\n';
+		}else if (wds.length > 16) {
 			td2.innerText += item[0] + '+' + item[1] + '\n';
+		}else{
+			td1.innerText += item[0] + '+' + item[1] + '\n';
 		}
 		item = d(wds);
 	}
@@ -27,18 +26,11 @@ function init(){
 	qr();
 	qt();
 	item = d(wds);
-	if(item != null){
-			td2.innerText += item[0] + '-' + item[1] + '\n';
-	}
-	item = d(wds);
 	while(item != null){
-//		txtOut.value += item[0] + '-' + item[1] + '\n';
-		if (wds.length > 14) {
-//			wdShow[2].push(item);
-			td3.innerText += item[0] + '-' + item[1] + '\n';
-		}else{
-//			wdShow[3].push(item);
+		if (wds.length > 15) {
 			td4.innerText += item[0] + '-' + item[1] + '\n';
+		}else{
+			td3.innerText += item[0] + '-' + item[1] + '\n';
 		}
 		item = d(wds);
 	}
@@ -53,7 +45,7 @@ function qw(){
 		}
 	}
 	for(let i = 6; i < 10; i++) {
-		for(let j = i+1; j < 10; j++) {
+		for(let j = i; j < 10; j++) {
 			wds.push(c([i,j, 0]));
 		}
 	}
